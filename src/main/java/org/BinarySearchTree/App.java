@@ -7,6 +7,8 @@ package org.BinarySearchTree;
 public class App {
 	public static void main(String[] args) {
 
+
+
 		BinarySearchTree binarySearchTree = new BinarySearchTree();
 
 		binarySearchTree.addNode(10);
@@ -57,6 +59,7 @@ public class App {
 		 * Dog myDog = new Dog("Rover"); myDog.foo(myDog);
 		 * System.out.println("Dod name" + myDog.get_name());
 		 */
+
 
 	}
 }
