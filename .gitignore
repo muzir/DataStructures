@@ -16,7 +16,14 @@
 
 # IntelliJ
 out/
+target/
 
 build/**
 .idea/**
 *.iml
+
+.gradle/
+build.gradle
+gradle/
+gradlew
+gradlew.bat
