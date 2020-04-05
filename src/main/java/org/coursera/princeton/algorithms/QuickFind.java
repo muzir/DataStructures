@@ -28,7 +28,7 @@ public class QuickFind implements Connectivity {
 	}
 
 	@Override
-	public boolean find(int p, int q) {
+	public boolean connected(int p, int q) {
 		return connections[p] == connections[q];
 	}
 

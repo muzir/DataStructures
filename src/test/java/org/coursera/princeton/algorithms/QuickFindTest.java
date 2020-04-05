@@ -11,7 +11,8 @@ class QuickFindTest {
 	@Test
 	void returnTrue_ifNodesHasConnection() {
 		quickFind.union(0, 5);
-		System.out.println(quickFind);
-		Assertions.assertTrue(quickFind.find(0, 5), "failed");
+		quickFind.union(0, 1);
+		Assertions.assertTrue(quickFind.connected(0, 5), "failed");
+		Assertions.assertTrue(quickFind.connected(1, 5), "failed");
 	}
 }
