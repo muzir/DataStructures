@@ -1,5 +1,6 @@
 package org.coursera.princeton.algorithms;
 
+import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class WeightedQuickUnion implements Connectivity {
@@ -13,26 +14,32 @@ public class WeightedQuickUnion implements Connectivity {
 	}
 
 	private void initialize() {
-		IntStream.range(0, connections.length - 1).forEach(c -> connections[c] = c);
-		IntStream.range(0, weights.length - 1).forEach(c -> connections[c] = 1);
+		IntStream.range(0, connections.length).forEach(c -> connections[c] = c);
+		IntStream.range(0, weights.length).forEach(c -> weights[c] = 1);
 	}
 
 	@Override
 	public void union(int p, int q) {
-		int pWeight = weights[p];
-		int qWeights = weights[q];
-		if (pWeight > qWeights) {
-			connections[q] = p;
+		int pRoot = findRoot(p);
+		int qRoot = findRoot(q);
+		if (pRoot == qRoot) {
+			return;
+		}
+		if (weights[p] > weights[q]) {
+			connections[q] = pRoot;
 			weights[p] = weights[p] + weights[q];
 		} else {
-			connections[p] = q;
+			connections[p] = qRoot;
 			weights[q] = weights[q] + weights[p];
 		}
 	}
 
 	@Override
 	public boolean connected(int p, int q) {
-		if (findRoot(p) == findRoot(q)) {
+		int pRoot = findRoot(p);
+		int qRoot = findRoot(q);
+		if (pRoot == qRoot) {
+			System.out.println("pRoot:" + pRoot + " qRoot:" + qRoot);
 			return true;
 		}
 		return false;
@@ -44,5 +51,9 @@ public class WeightedQuickUnion implements Connectivity {
 			return value;
 		}
 		return findRoot(value);
+	}
+
+	public String toString() {
+		return Arrays.toString(connections);
 	}
 }

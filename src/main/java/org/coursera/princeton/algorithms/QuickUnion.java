@@ -9,10 +9,10 @@ public class QuickUnion implements Connectivity {
 
 	public QuickUnion(int n) {
 		connections = new int[n];
-		initializeConnections(connections);
+		initializeConnections();
 	}
 
-	private void initializeConnections(int[] connections) {
+	private void initializeConnections() {
 		IntStream.range(0, connections.length).forEach(c -> connections[c] = c);
 	}
 
