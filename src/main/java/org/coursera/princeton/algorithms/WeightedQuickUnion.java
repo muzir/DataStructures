@@ -25,12 +25,12 @@ public class WeightedQuickUnion implements Connectivity {
 		if (pRoot == qRoot) {
 			return;
 		}
-		if (weights[p] > weights[q]) {
-			connections[q] = pRoot;
-			weights[p] = weights[p] + weights[q];
+		if (weights[pRoot] > weights[qRoot]) {
+			connections[qRoot] = pRoot;
+			weights[pRoot] = weights[pRoot] + weights[qRoot];
 		} else {
-			connections[p] = qRoot;
-			weights[q] = weights[q] + weights[p];
+			connections[pRoot] = qRoot;
+			weights[qRoot] = weights[qRoot] + weights[pRoot];
 		}
 	}
 

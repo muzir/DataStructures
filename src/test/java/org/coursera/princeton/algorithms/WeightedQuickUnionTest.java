@@ -19,7 +19,7 @@ class WeightedweightedQuickUnionTest {
 		weightedQuickUnion.union(5, 0);
 		weightedQuickUnion.union(7, 2);
 		weightedQuickUnion.union(6, 1);
-		System.out.println(weightedQuickUnion.toString());
+
 	}
 
 	@BeforeEach
@@ -32,6 +32,9 @@ class WeightedweightedQuickUnionTest {
 		assertTrue(weightedQuickUnion.connected(3, 4));
 		assertTrue(weightedQuickUnion.connected(2, 6));
 		assertTrue(weightedQuickUnion.connected(2, 5));
+		assertTrue(weightedQuickUnion.connected(2, 7));
+		assertTrue(weightedQuickUnion.connected(0, 1));
+		assertTrue(weightedQuickUnion.connected(3, 8));
 	}
 
 	@Test
@@ -39,15 +42,10 @@ class WeightedweightedQuickUnionTest {
 		assertFalse(weightedQuickUnion.connected(3, 6));
 		assertFalse(weightedQuickUnion.connected(3, 2));
 		assertFalse(weightedQuickUnion.connected(2, 3));
-		assertFalse(weightedQuickUnion.connected(2, 5));
-
-		assertFalse(weightedQuickUnion.connected(2, 7));
 		assertFalse(weightedQuickUnion.connected(2, 8));
 		assertFalse(weightedQuickUnion.connected(0, 3));
-		assertFalse(weightedQuickUnion.connected(0, 1));
 		assertFalse(weightedQuickUnion.connected(3, 1));
 		assertFalse(weightedQuickUnion.connected(3, 0));
 		assertFalse(weightedQuickUnion.connected(3, 7));
-		assertFalse(weightedQuickUnion.connected(3, 8));
 	}
 }
