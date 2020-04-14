@@ -1,4 +1,4 @@
-package org.coursera.princeton.algorithms;
+package org.coursera.princeton.algorithms.week1;
 
 public interface Connectivity {
 	void union(int p, int q);

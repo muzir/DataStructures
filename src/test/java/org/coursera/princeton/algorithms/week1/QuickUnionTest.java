@@ -1,4 +1,4 @@
-package org.coursera.princeton.algorithms;
+package org.coursera.princeton.algorithms.week1;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
