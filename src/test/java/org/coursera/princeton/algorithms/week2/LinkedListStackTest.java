@@ -41,6 +41,27 @@ public class LinkedListStackTest {
 		assertEquals("9", stack.pop());
 	}
 
+	@Test
+	public void returnNextItem_ifPopMultipleItems() {
+		IntStream.range(0, 10).forEach(c -> stack.push(String.valueOf(c)));
+		assertMultipleStackPops();
+		assertStackIsEmpty();
+	}
+
+	private void assertMultipleStackPops() {
+		assertEquals("9", stack.pop());
+		assertEquals("8", stack.pop());
+		assertEquals("7", stack.pop());
+		assertEquals("6", stack.pop());
+		assertEquals("5", stack.pop());
+		assertEquals("4", stack.pop());
+		assertEquals("3", stack.pop());
+		assertEquals("2", stack.pop());
+		assertEquals("1", stack.pop());
+		assertEquals("0", stack.pop());
+		assertEquals(0, stack.size());
+	}
+
 	private void assertStackIsNotEmpty() {
 		assertFalse(stack.isEmpty());
 		assertTrue(stack.size() > 0);

@@ -14,7 +14,9 @@ public class LinkedListStack implements Stack<String> {
 	@Override
 	public String pop() {
 		size--;
-		return topNode.value;
+		String value = topNode.value;
+		topNode = topNode.nextNode;
+		return value;
 	}
 
 	@Override
