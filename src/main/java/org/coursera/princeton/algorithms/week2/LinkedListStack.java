@@ -13,6 +13,9 @@ public class LinkedListStack implements Stack<String> {
 
 	@Override
 	public String pop() {
+		if (topNode == null) {
+			throw new EmptyStackException("Stack is empty");
+		}
 		size--;
 		String value = topNode.value;
 		topNode = topNode.nextNode;

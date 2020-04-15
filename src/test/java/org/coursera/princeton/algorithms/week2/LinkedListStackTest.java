@@ -48,6 +48,13 @@ public class LinkedListStackTest {
 		assertStackIsEmpty();
 	}
 
+	@Test
+	public void throwRuntimeExceptionInPop_ifStackIsEmpty() {
+		EmptyStackException exception = assertThrows(EmptyStackException.class, () -> {
+			stack.pop();
+		});
+	}
+
 	private void assertMultipleStackPops() {
 		assertEquals("9", stack.pop());
 		assertEquals("8", stack.pop());
