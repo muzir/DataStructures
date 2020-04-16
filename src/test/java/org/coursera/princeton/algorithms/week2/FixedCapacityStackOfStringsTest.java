@@ -2,8 +2,9 @@ package org.coursera.princeton.algorithms.week2;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.stream.IntStream;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class FixedCapacityStackOfStringsTest {
 
@@ -30,5 +31,31 @@ public class FixedCapacityStackOfStringsTest {
 		assertThrows(EmptyStackException.class, () -> {
 			stack.pop();
 		});
+	}
+
+	@Test
+	public void returnSizeAsOne_ifPushAnItemToStack() {
+		stack.push("item");
+		assertTrue(stack.size() == 1);
+	}
+
+	@Test
+	public void returnSizeAsZero_ifPopCalledAfterPushOneItem() {
+		stack.push("item");
+		stack.pop();
+		assertTrue(stack.size() == 0);
+	}
+
+	@Test
+	public void resizeToDouble_ifStackReachItsCapacity() {
+		IntStream.range(0, 40).forEach(i -> stack.push(String.valueOf(i)));
+		assertTrue(stack.size() == 40);
+	}
+
+	@Test
+	public void resizeToHalf_ifStackSizeReducedOneOfFour() {
+		IntStream.range(0, 40).forEach(i -> stack.push(String.valueOf(i)));
+		IntStream.range(0, 30).forEach(i -> stack.pop());
+		assertTrue(stack.size() == 10);
 	}
 }
