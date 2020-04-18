@@ -23,6 +23,6 @@ public interface Deque<Item> extends Iterable<Item> {
 	Item removeLast();
 
 	// return an iterator over items in order from front to back
-	public Iterator<Item> iterator();
+	Iterator<Item> iterator();
 
 }

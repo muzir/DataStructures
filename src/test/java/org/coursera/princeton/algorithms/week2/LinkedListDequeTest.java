@@ -6,13 +6,15 @@ import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 public class LinkedListDequeTest {
 
-	Deque linkedListDeque;
+	Deque<String> linkedListDeque;
 
 	@BeforeEach
 	void setup() {
-		linkedListDeque = new LinkedListDeque();
+		linkedListDeque = new LinkedListDeque<String>();
 	}
 
 	@Test
@@ -55,5 +57,57 @@ public class LinkedListDequeTest {
 		Assertions.assertThrows(NoSuchElementException.class, () -> {
 			linkedListDeque.iterator().next();
 		});
+	}
+
+
+	@Test
+	void returnItemByIterator_ifAddFirstItemToDeque() {
+		String item = "item1";
+		linkedListDeque.addFirst(item);
+		assertItemAddedFirstOfDeque(item);
+	}
+
+	private void assertItemAddedFirstOfDeque(String item) {
+		assertTrue(linkedListDeque.iterator().hasNext());
+		assertEquals(1, linkedListDeque.size());
+		assertEquals(item, linkedListDeque.iterator().next());
+	}
+
+	@Test
+	void returnSizeZero_ifRemoveFirstItemFromDeque() {
+		String item = "item1";
+		linkedListDeque.addFirst(item);
+		assertEquals(item, linkedListDeque.iterator().next());
+		assertEquals(1, linkedListDeque.size());
+
+		String item1 = linkedListDeque.removeFirst();
+		assertEquals(item, item1);
+		assertDequeIsEmpty();
+	}
+
+	@Test
+	void returnSizeOne_ifAddLastAnItemToDeque() {
+		String item = "Item2";
+		linkedListDeque.addLast(item);
+		assertTrue(linkedListDeque.size() == 1);
+	}
+
+	@Test
+	void returnItem_ifRemoveLastFromDeque() {
+		String item = "item";
+		linkedListDeque.addLast(item);
+		assertTrue(linkedListDeque.size() == 1);
+
+		String actualItem = linkedListDeque.removeLast();
+		assertEquals(item, actualItem);
+		assertDequeIsEmpty();
+	}
+
+	private void assertDequeIsEmpty() {
+		assertThrows(NoSuchElementException.class, () -> {
+			linkedListDeque.iterator().next();
+		});
+		assertEquals(0, linkedListDeque.size());
+		assertTrue(linkedListDeque.isEmpty());
 	}
 }

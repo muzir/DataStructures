@@ -6,10 +6,9 @@ import java.util.NoSuchElementException;
 
 public class LinkedListDeque<Item> implements Deque<Item> {
 
-	private Node head;
-	private Node tail;
+	private Node first;
+	private Node last;
 	private int size;
-	private Iterator<Item> iterator;
 
 	public LinkedListDeque() {
 	}
@@ -21,17 +20,23 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 
 	@Override
 	public int size() {
-		return 0;
+		return size;
 	}
 
 	@Override
 	public void addFirst(Item item) {
 		validateNullCheck(item);
+		Node newNode = new Node(item, first);
+		first = newNode;
+		size++;
 	}
 
 	@Override
 	public void addLast(Item item) {
 		validateNullCheck(item);
+		Node newNode = new Node(item, last);
+		last = newNode;
+		size++;
 	}
 
 	private void validateNullCheck(Item item) {
@@ -43,7 +48,10 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	@Override
 	public Item removeFirst() {
 		validateDequeIsNotEmpty();
-		return null;
+		Item item = first.item;
+		first = first.prev;
+		size--;
+		return item;
 	}
 
 	private void validateDequeIsNotEmpty() {
@@ -55,18 +63,44 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	@Override
 	public Item removeLast() {
 		validateDequeIsNotEmpty();
-		return null;
+		Item item = last.item;
+		last = last.prev;
+		size--;
+		return item;
 	}
 
 	@Override
 	public Iterator<Item> iterator() {
-		return iterator;
+		return new NodeIterator();
 	}
-
 
 	private class Node {
 		private Node prev;
-		private Node next;
 		private Item item;
+
+		public Node(Item item, Node prev) {
+			this.item = item;
+			this.prev = prev;
+		}
+	}
+
+	private class NodeIterator implements Iterator<Item> {
+
+		private Node current = first;
+
+		@Override
+		public boolean hasNext() {
+			return current != null;
+		}
+
+		@Override
+		public Item next() {
+			if (current == null) {
+				throw new NoSuchElementException();
+			}
+			Item item = current.item;
+			current = current.prev;
+			return item;
+		}
 	}
 }
