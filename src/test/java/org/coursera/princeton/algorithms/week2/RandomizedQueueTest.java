@@ -56,7 +56,11 @@ public class RandomizedQueueTest {
 		randomizedQueue.enqueue(ITEM);
 
 		assertTrue(randomizedQueue.size() == 1);
-		assertEquals(ITEM, randomizedQueue.iterator().next());
 	}
 
+	@Test
+	void returnNotNullItem_ifSampleCalled() {
+		randomizedQueue.enqueue(ITEM);
+		assertNotNull(randomizedQueue.sample());
+	}
 }

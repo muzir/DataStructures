@@ -1,22 +1,27 @@
 package org.coursera.princeton.algorithms.week2;
 
+import edu.princeton.cs.algs4.StdRandom;
+
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements RandomDeque<Item> {
 
+	private final Iterator<Item> iterator;
 	private Item[] container;
-	private int firstIndex;
 	private int tailIndex;
 	private int size;
+	private int capacity;
 
 	public RandomizedQueue() {
-		this.container = (Item[]) new Object[10];
+		this.capacity = 10;
+		this.container = (Item[]) new Object[capacity];
+		this.iterator = new RandomIterator();
 	}
 
 	@Override
 	public boolean isEmpty() {
-		return container == null || container.length == 0;
+		return container == null || size() == 0;
 	}
 
 	@Override
@@ -27,8 +32,23 @@ public class RandomizedQueue<Item> implements RandomDeque<Item> {
 	@Override
 	public void enqueue(Item item) {
 		nullCheck(item);
+		if (!isEmpty()) {
+			tailIndex++;
+		}
+		if (tailIndex == capacity - 1) {
+			resize(2 * capacity);
+		}
 		container[tailIndex] = item;
 		size++;
+	}
+
+	private void resize(int newCapacity) {
+		Item[] newContainer = (Item[]) new Object[newCapacity];
+		for (int i = 0; i < capacity; i++) {
+			newContainer[i] = container[i];
+		}
+		this.container = newContainer;
+		this.capacity = newCapacity;
 	}
 
 	private void nullCheck(Item item) {
@@ -46,7 +66,7 @@ public class RandomizedQueue<Item> implements RandomDeque<Item> {
 	@Override
 	public Item sample() {
 		checkQueueIsEmpty();
-		return null;
+		return container[StdRandom.uniform(size)];
 	}
 
 	private void checkQueueIsEmpty() {
@@ -57,21 +77,28 @@ public class RandomizedQueue<Item> implements RandomDeque<Item> {
 
 	@Override
 	public Iterator iterator() {
-		return new RandomIterator();
+		StdRandom.shuffle(container);
+		return iterator;
 	}
-
 
 	private class RandomIterator implements Iterator<Item> {
 
+		private int index;
+
+		public RandomIterator() {
+		}
+
 		@Override
 		public boolean hasNext() {
-			return false;
+			return index != capacity;
 		}
 
 		@Override
 		public Item next() {
 			checkQueueIsEmpty();
-			return null;
+			Item item = container[index];
+			index++;
+			return item;
 		}
 	}
 }
