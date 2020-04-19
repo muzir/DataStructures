@@ -2,7 +2,7 @@ package org.coursera.princeton.algorithms.week2;
 
 import java.util.Iterator;
 
-public interface RandomizedDeque<Item> extends Iterable<Item> {
+public interface RandomDeque<Item> extends Iterable<Item> {
 
 	// is the randomized queue empty?
 	boolean isEmpty();
