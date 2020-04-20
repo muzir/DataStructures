@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,11 +57,23 @@ public class RandomizedQueueTest {
 		randomizedQueue.enqueue(ITEM);
 
 		assertTrue(randomizedQueue.size() == 1);
+		assertEquals(ITEM, randomizedQueue.dequeue());
 	}
 
 	@Test
 	void returnNotNullItem_ifSampleCalled() {
 		randomizedQueue.enqueue(ITEM);
 		assertNotNull(randomizedQueue.sample());
+	}
+
+	@Test
+	void doNotThrowException_ifEnqueueAndDequeuMulptipleItems() {
+		IntStream.range(0, 100).forEach(i -> {
+			randomizedQueue.enqueue("item" + i);
+		});
+		IntStream.range(0, 100).forEach(i -> {
+			randomizedQueue.sample();
+			System.out.println(randomizedQueue.dequeue());
+		});
 	}
 }

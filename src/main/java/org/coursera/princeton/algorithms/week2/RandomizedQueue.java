@@ -35,16 +35,16 @@ public class RandomizedQueue<Item> implements RandomDeque<Item> {
 		if (!isEmpty()) {
 			tailIndex++;
 		}
-		if (tailIndex == capacity - 1) {
-			resize(2 * capacity);
-		}
 		container[tailIndex] = item;
 		size++;
+		if (size == capacity - 1) {
+			resize(2 * capacity);
+		}
 	}
 
 	private void resize(int newCapacity) {
 		Item[] newContainer = (Item[]) new Object[newCapacity];
-		for (int i = 0; i < capacity; i++) {
+		for (int i = 0; i < size; i++) {
 			newContainer[i] = container[i];
 		}
 		this.container = newContainer;
@@ -60,7 +60,18 @@ public class RandomizedQueue<Item> implements RandomDeque<Item> {
 	@Override
 	public Item dequeue() {
 		checkQueueIsEmpty();
-		return null;
+		int index = StdRandom.uniform(size);
+		Item item = container[index];
+		if (tailIndex != 0) {
+			Item tailItem = container[tailIndex];
+			container[index] = tailItem;
+			tailIndex--;
+		}
+		size--;
+		if (size < capacity / 4) {
+			resize(capacity / 2);
+		}
+		return item;
 	}
 
 	@Override
