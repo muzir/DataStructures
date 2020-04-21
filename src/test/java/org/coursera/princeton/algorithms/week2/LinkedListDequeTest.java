@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -101,6 +102,28 @@ public class LinkedListDequeTest {
 		String actualItem = linkedListDeque.removeLast();
 		assertEquals(item, actualItem);
 		assertDequeIsEmpty();
+	}
+
+	@Test
+	void randomHunderedInsertionWithAddLastAndDeletionWithRemoveFirst() {
+		String item = "item";
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.addLast(item + i);
+		});
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.removeFirst();
+		});
+	}
+
+	@Test
+	void randomHunderedInsertionWithAddFirstAndDeletionWithRemoveLast() {
+		String item = "item";
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.addFirst(item + i);
+		});
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.removeLast();
+		});
 	}
 
 	private void assertDequeIsEmpty() {

@@ -26,16 +26,30 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	@Override
 	public void addFirst(Item item) {
 		validateNullCheck(item);
-		Node newNode = new Node(item, first);
-		first = newNode;
+		if (size == 0) {
+			Node newNode = new Node(item);
+			last = newNode;
+			first = newNode;
+		} else {
+			Node newNode = new Node(item, first, null);
+			first.next = newNode;
+			first = newNode;
+		}
 		size++;
 	}
 
 	@Override
 	public void addLast(Item item) {
 		validateNullCheck(item);
-		Node newNode = new Node(item, last);
-		last = newNode;
+		if (size == 0) {
+			Node newNode = new Node(item);
+			first = newNode;
+			last = newNode;
+		} else {
+			Node newNode = new Node(item, last, null);
+			last.next = newNode;
+			last = newNode;
+		}
 		size++;
 	}
 
@@ -49,6 +63,9 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	public Item removeFirst() {
 		validateDequeIsNotEmpty();
 		Item item = first.item;
+		if (first.prev != null) {
+			first.prev.next = null;
+		}
 		first = first.prev;
 		size--;
 		return item;
@@ -64,7 +81,10 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	public Item removeLast() {
 		validateDequeIsNotEmpty();
 		Item item = last.item;
-		last = last.prev;
+		if (last.next != null) {
+			last.next.prev = null;
+		}
+		last = last.next;
 		size--;
 		return item;
 	}
@@ -76,17 +96,27 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 
 	private class Node {
 		private Node prev;
+		private Node next;
 		private Item item;
 
-		public Node(Item item, Node prev) {
+		public Node(Item item) {
+			this.item = item;
+		}
+
+		public Node(Item item, Node prev, Node next) {
 			this.item = item;
 			this.prev = prev;
+			this.next = next;
 		}
 	}
 
 	private class NodeIterator implements Iterator<Item> {
 
-		private Node current = first;
+		private Node current;
+
+		public NodeIterator() {
+			this.current = first;
+		}
 
 		@Override
 		public boolean hasNext() {
