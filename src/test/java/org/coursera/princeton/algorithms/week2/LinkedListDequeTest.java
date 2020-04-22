@@ -116,6 +116,17 @@ public class LinkedListDequeTest {
 	}
 
 	@Test
+	void randomHunderedInsertionWithAddLastAndDeletionWithRemoveLast() {
+		String item = "item";
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.addLast(item + i);
+		});
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.removeLast();
+		});
+	}
+
+	@Test
 	void randomHunderedInsertionWithAddFirstAndDeletionWithRemoveLast() {
 		String item = "item";
 		IntStream.range(0, 100).forEach(i -> {
@@ -123,6 +134,17 @@ public class LinkedListDequeTest {
 		});
 		IntStream.range(0, 100).forEach(i -> {
 			linkedListDeque.removeLast();
+		});
+	}
+
+	@Test
+	void randomHunderedInsertionWithAddFirstAndDeletionWithRemoveFirst() {
+		String item = "item";
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.addFirst(item + i);
+		});
+		IntStream.range(0, 100).forEach(i -> {
+			linkedListDeque.removeFirst();
 		});
 	}
 

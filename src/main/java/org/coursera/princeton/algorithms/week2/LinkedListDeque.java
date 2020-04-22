@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 
 public class LinkedListDeque<Item> implements Deque<Item> {
 
-	private Node first;
-	private Node last;
+	private Node<Item> first;
+	private Node<Item> last;
 	private int size;
 
 	public LinkedListDeque() {
@@ -27,11 +27,11 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	public void addFirst(Item item) {
 		validateNullCheck(item);
 		if (size == 0) {
-			Node newNode = new Node(item);
+			Node newNode = new Node.Builder().item(item).build();
 			last = newNode;
 			first = newNode;
 		} else {
-			Node newNode = new Node(item, first, null);
+			Node newNode = new Node.Builder().item(item).prev(first).build();
 			first.next = newNode;
 			first = newNode;
 		}
@@ -42,12 +42,12 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 	public void addLast(Item item) {
 		validateNullCheck(item);
 		if (size == 0) {
-			Node newNode = new Node(item);
+			Node newNode = new Node.Builder().item(item).build();
 			first = newNode;
 			last = newNode;
 		} else {
-			Node newNode = new Node(item, last, null);
-			last.next = newNode;
+			Node newNode = new Node.Builder().item(item).next(last).build();
+			last.prev = newNode;
 			last = newNode;
 		}
 		size++;
@@ -94,28 +94,49 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 		return new NodeIterator();
 	}
 
-	private class Node {
+	static class Node<Item> {
 		private Node prev;
 		private Node next;
 		private Item item;
 
-		public Node(Item item) {
-			this.item = item;
+		private Node(Builder<Item> builder) {
+			this.item = builder.item;
+			this.prev = builder.prev;
+			this.next = builder.next;
 		}
 
-		public Node(Item item, Node prev, Node next) {
-			this.item = item;
-			this.prev = prev;
-			this.next = next;
+		static class Builder<Item> {
+			private Node prev;
+			private Node next;
+			private Item item;
+
+			public Builder prev(Node prev) {
+				this.prev = prev;
+				return this;
+			}
+
+			public Builder next(Node next) {
+				this.next = next;
+				return this;
+			}
+
+			public Builder item(Item item) {
+				this.item = item;
+				return this;
+			}
+
+			public Node build() {
+				return new Node(this);
+			}
 		}
 	}
 
-	private class NodeIterator implements Iterator<Item> {
+	private class NodeIterator<Item> implements Iterator<Item> {
 
-		private Node current;
+		private Node<Item> current;
 
 		public NodeIterator() {
-			this.current = first;
+			this.current = (Node<Item>) first;
 		}
 
 		@Override
@@ -125,7 +146,7 @@ public class LinkedListDeque<Item> implements Deque<Item> {
 
 		@Override
 		public Item next() {
-			if (current == null) {
+			if (isEmpty()) {
 				throw new NoSuchElementException();
 			}
 			Item item = current.item;
