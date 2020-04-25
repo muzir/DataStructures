@@ -15,6 +15,8 @@ public class InsertionSort implements Sortable {
 				if (current.compareTo(prev) < 1) {
 					swap(currentIndex, j, array);
 					currentIndex = j;
+				} else {
+					break;
 				}
 			}
 		}
