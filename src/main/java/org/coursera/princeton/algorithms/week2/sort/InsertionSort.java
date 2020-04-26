@@ -1,8 +1,6 @@
 package org.coursera.princeton.algorithms.week2.sort;
 
 
-import java.util.Arrays;
-
 public class InsertionSort implements Sortable {
 	@Override
 	public void sort(Comparable[] array) {
@@ -20,7 +18,6 @@ public class InsertionSort implements Sortable {
 				}
 			}
 		}
-		System.out.println(Arrays.toString(array));
 	}
 
 	private void swap(int currentIndex, int prevIndex, Comparable[] array) {
