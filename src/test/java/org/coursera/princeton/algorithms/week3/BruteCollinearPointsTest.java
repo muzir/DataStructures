@@ -16,4 +16,9 @@ public class BruteCollinearPointsTest {
 		assertThrows(IllegalArgumentException.class, () -> new BruteCollinearPoints(points));
 	}
 
+	@Test
+	void throwIllegalArgumentException_ifIsThereAnyDuplicatePointInTheArguments() {
+		Point[] points = {new Point(0, 1), new Point(0, 0), new Point(0, 1)};
+		assertThrows(IllegalArgumentException.class, () -> new BruteCollinearPoints(points));
+	}
 }
