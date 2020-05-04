@@ -58,6 +58,15 @@ public class PointTest {
 	}
 
 	@Test
+	void test_doubleDivision() {
+		//p                        = (150, 211)
+		//q                        = (36, 330)
+		Point p = new Point(150, 211);
+		Point q = new Point(36, 330);
+		assertEquals(-1.043859649122807, p.slopeTo(q));
+	}
+
+	@Test
 	void sortBySlopeOrder() {
 		Point[] points = {p0, p1, p2, p3, p4, p5};
 		System.out.println(Arrays.toString(points));

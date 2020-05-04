@@ -2,17 +2,17 @@ package org.coursera.princeton.algorithms.week3;
 
 public class BruteCollinearPoints {
 
-	private Point[] points;
-	private LineSegment[] segments;
+	private final Point[] points;
+	private final LineSegment[] segments;
 
 	// finds all line segments containing 4 points
 	public BruteCollinearPoints(Point[] points) {
 		validatePoints(points);
 		this.points = points;
-		this.segments = calculateSegments(points);
+		this.segments = calculateSegments();
 	}
 
-	private LineSegment[] calculateSegments(Point[] points) {
+	private LineSegment[] calculateSegments() {
 		int pointLength = points.length;
 		LineSegment[] lineSegments = new LineSegment[pointLength];
 		for (int p = 0; p < pointLength; p++) {
