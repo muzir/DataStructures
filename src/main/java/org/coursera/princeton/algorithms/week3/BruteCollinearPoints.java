@@ -1,20 +1,22 @@
 package org.coursera.princeton.algorithms.week3;
 
+import java.util.Arrays;
+
 public class BruteCollinearPoints {
 
 	private final Point[] points;
-	private final LineSegment[] segments;
+	private LineSegment[] segments;
 
 	// finds all line segments containing 4 points
 	public BruteCollinearPoints(Point[] points) {
 		validatePoints(points);
 		this.points = points;
-		this.segments = calculateSegments();
+		this.segments = new LineSegment[0];
+		fillSegments();
 	}
 
-	private LineSegment[] calculateSegments() {
+	private void fillSegments() {
 		int pointLength = points.length;
-		LineSegment[] lineSegments = new LineSegment[pointLength];
 		for (int p = 0; p < pointLength; p++) {
 			Point pointP = points[p];
 			for (int q = p + 1; q < pointLength; q++) {
@@ -24,22 +26,26 @@ public class BruteCollinearPoints {
 					for (int s = r + 1; s < pointLength; s++) {
 						Point pointS = points[s];
 						if (checkCollinear(pointP, pointQ, pointR, pointS)) {
-							addLineSegments(lineSegments, new LineSegment(pointP, pointQ));
+							System.out.println("p:" + p + " q:" + q + " r:" + r + " s:" + s);
+							addLineSegments(new LineSegment(pointP, pointS));
 						}
 					}
 				}
 			}
 		}
-		return new LineSegment[0];
 	}
 
-	private void addLineSegments(LineSegment[] lineSegments, LineSegment lineSegment) {
-		int length = lineSegments.length;
+	private void addLineSegments(LineSegment lineSegment) {
+		int length = segments.length;
+		length = length + 1;
+		LineSegment[] newLineSegment = Arrays.copyOf(segments, length);
 		for (int i = 0; i < length; i++) {
-			if (lineSegments[i] == null) {
-				lineSegments[i] = lineSegment;
+			if (newLineSegment[i] == null) {
+				newLineSegment[i] = lineSegment;
+				break;
 			}
 		}
+		this.segments = newLineSegment;
 	}
 
 	private boolean checkCollinear(Point pointP, Point pointQ, Point pointR, Point pointS) {

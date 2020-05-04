@@ -2,11 +2,12 @@ package org.coursera.princeton.algorithms.week3;
 
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdDraw;
+import edu.princeton.cs.algs4.StdOut;
 
 public class SampleClient {
 	public static void main(String[] args) {
 		String path = System.getProperty("user.dir");
-		String filePath = path + "/src/main/resources/input6.txt";
+		String filePath = path + "/src/main/resources/input8.txt";
 		// read the n points from a file
 		In in = new In(filePath);
 		int n = in.readInt();
@@ -27,12 +28,12 @@ public class SampleClient {
 		StdDraw.show();
 
 		// print and draw the line segments
-		/*FastCollinearPoints collinear = new FastCollinearPoints(points);
+		BruteCollinearPoints collinear = new BruteCollinearPoints(points);
 		for (LineSegment segment : collinear.segments()) {
 			StdOut.println(segment);
 			segment.draw();
 		}
-		StdDraw.show();*/
+		StdDraw.show();
 
 	}
 }
