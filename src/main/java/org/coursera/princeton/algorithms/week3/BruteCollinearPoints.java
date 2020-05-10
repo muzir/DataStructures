@@ -10,7 +10,7 @@ public class BruteCollinearPoints {
 	// finds all line segments containing 4 points
 	public BruteCollinearPoints(Point[] points) {
 		validatePoints(points);
-		this.points = points;
+		this.points = Arrays.copyOf(points, points.length);
 		this.segments = new LineSegment[0];
 		fillSegments();
 	}
@@ -26,8 +26,9 @@ public class BruteCollinearPoints {
 					for (int s = r; s < pointLength; s++) {
 						Point pointS = points[s];
 						if (checkCollinear(pointP, pointQ, pointR, pointS)) {
-							System.out.println("p:" + pointP.toString() + " q:" + pointQ.toString() + " r:" + pointR.toString() + " s:" + pointS.toString());
-							addLineSegments(new LineSegment(pointP, pointS));
+							Point[] tempPoints = {pointP, pointQ, pointR, pointS};
+							Arrays.sort(tempPoints);
+							addLineSegments(new LineSegment(tempPoints[tempPoints.length - 1], tempPoints[0]));
 						}
 					}
 				}
@@ -50,10 +51,8 @@ public class BruteCollinearPoints {
 
 	private boolean checkCollinear(Point pointP, Point pointQ, Point pointR, Point pointS) {
 		if (pointP.compareTo(pointQ) == 0 ||
-				pointP.compareTo(pointQ) == 0 ||
 				pointP.compareTo(pointR) == 0 ||
 				pointP.compareTo(pointS) == 0 ||
-				pointR.compareTo(pointS) == 0 ||
 				pointQ.compareTo(pointR) == 0 ||
 				pointQ.compareTo(pointS) == 0 ||
 				pointR.compareTo(pointS) == 0) {
@@ -69,21 +68,21 @@ public class BruteCollinearPoints {
 		if (points == null) {
 			throw new IllegalArgumentException();
 		}
-		duplicatePointCheck(points);
+		nullAndDuplicatePointCheck(points);
 	}
 
-	private void duplicatePointCheck(Point[] points) {
-		int pointsLenght = points.length;
-		for (int i = 0; i < pointsLenght; i++) {
+	private void nullAndDuplicatePointCheck(Point[] points) {
+		int pointsLength = points.length;
+		for (int i = 0; i < pointsLength; i++) {
 			Point outerPoint = points[i];
-			if (outerPoint == null) {
-				throw new IllegalArgumentException();
-			}
-			for (int j = 0; j < pointsLenght; j++) {
+			for (int j = 0; j < pointsLength; j++) {
+				Point innerPoint = points[j];
+				if (innerPoint == null) {
+					throw new IllegalArgumentException();
+				}
 				if (i == j) {
 					continue;
 				}
-				Point innerPoint = points[j];
 				if (outerPoint.compareTo(innerPoint) == 0) {
 					throw new IllegalArgumentException();
 				}
@@ -98,6 +97,6 @@ public class BruteCollinearPoints {
 
 	// the line segments
 	public LineSegment[] segments() {
-		return segments;
+		return Arrays.copyOf(segments, segments.length);
 	}
 }
