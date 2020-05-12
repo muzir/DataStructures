@@ -15,23 +15,23 @@ public class FastCollinearPoints {
 	}
 
 	private void fillLineSegments() {
-		int pointsLength = points.length;
-		int incrementalCount = 1;
-		for (int i = 0; i < pointsLength; i = i + incrementalCount) {
-			Point p = points[i];
-			Arrays.sort(points, p.slopeOrder());
+		int pointsLength = this.points.length;
+		for (int i = 0; i < pointsLength; i++) {
+			Point p = this.points[i];
+			Point[] copyPoints = Arrays.copyOf(this.points, this.points.length);
+			Arrays.sort(copyPoints, p.slopeOrder());
 			double slope = 0.0;
-			for (int j = i + 1; j < pointsLength; j++) {
-				Point q = points[j];
+			for (int j = 1; j < pointsLength; j++) {
+				Point q = copyPoints[j];
 				double pq = p.slopeTo(q);
 				if (pq == slope) {
 					continue;
 				} else if ((slope == 0) && (pq != slope)) {
 					slope = pq;
 				} else {
-					incrementalCount = (j - i);
-					if (incrementalCount >= 4) {
-						addSegments(points[i], points[j]);
+					if (j >= 4) {
+						addSegments(p, copyPoints[j]);
+						break;
 					}
 				}
 			}

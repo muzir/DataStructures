@@ -5,13 +5,13 @@ import java.util.Arrays;
 public class BruteCollinearPoints {
 
 	private final Point[] points;
-	private LineSegment[] segments;
+	private LineSegment[] segments = new LineSegment[0];
+
 
 	// finds all line segments containing 4 points
 	public BruteCollinearPoints(Point[] points) {
 		validatePoints(points);
 		this.points = Arrays.copyOf(points, points.length);
-		this.segments = new LineSegment[0];
 		fillSegments();
 	}
 
@@ -28,7 +28,7 @@ public class BruteCollinearPoints {
 						if (checkCollinear(pointP, pointQ, pointR, pointS)) {
 							Point[] tempPoints = {pointP, pointQ, pointR, pointS};
 							Arrays.sort(tempPoints);
-							addLineSegments(new LineSegment(tempPoints[tempPoints.length - 1], tempPoints[0]));
+							addSegments(tempPoints[tempPoints.length - 1], tempPoints[0]);
 						}
 					}
 				}
@@ -36,17 +36,13 @@ public class BruteCollinearPoints {
 		}
 	}
 
-	private void addLineSegments(LineSegment lineSegment) {
-		int length = segments.length;
-		length = length + 1;
-		LineSegment[] newLineSegment = Arrays.copyOf(segments, length);
-		for (int i = 0; i < length; i++) {
-			if (newLineSegment[i] == null) {
-				newLineSegment[i] = lineSegment;
-				break;
-			}
-		}
-		this.segments = newLineSegment;
+	private void addSegments(Point point, Point point1) {
+		LineSegment lineSegment = new LineSegment(point, point1);
+		int segmentsCount = numberOfSegments();
+		segmentsCount++;
+		LineSegment[] newLineSegments = Arrays.copyOf(segments, segmentsCount);
+		newLineSegments[segmentsCount - 1] = lineSegment;
+		segments = newLineSegments;
 	}
 
 	private boolean checkCollinear(Point pointP, Point pointQ, Point pointR, Point pointS) {
