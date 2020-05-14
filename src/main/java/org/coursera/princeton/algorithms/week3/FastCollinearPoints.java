@@ -7,9 +7,14 @@ public class FastCollinearPoints {
 	private final Point[] points;
 	private LineSegment[] lineSegments = new LineSegment[0];
 
+	private Point[] startPoints;
+	private Point[] endPoints;
+
 	// finds all line segments containing 4 or more points
 	public FastCollinearPoints(Point[] points) {
 		validatePoints(points);
+		startPoints = new Point[points.length];
+		endPoints = new Point[points.length];
 		this.points = Arrays.copyOf(points, points.length);
 		fillLineSegments();
 	}
@@ -30,16 +35,33 @@ public class FastCollinearPoints {
 					slope = pq;
 				} else {
 					if (j >= 4) {
-						addSegments(p, copyPoints[j]);
+						addSegments(copyPoints, j);
 						break;
 					}
+					slope = 0.0;
 				}
 			}
 		}
 	}
 
-	private void addSegments(Point point, Point point1) {
-		LineSegment lineSegment = new LineSegment(point, point1);
+
+	private void addSegments(Point[] points, int j) {
+		Point[] newArray = Arrays.copyOf(points, j);
+		Arrays.sort(newArray);
+		Point startPoint = newArray[0];
+		Point endPoint = newArray[newArray.length - 1];
+		for (int i = 0; i < startPoints.length; i++) {
+			if (startPoints[i] != null && startPoints[i].compareTo(startPoint) == 0) {
+				if (endPoints[i] != null && endPoints[i].compareTo(endPoint) == 0) {
+					return;
+				}
+			} else if (startPoints[i] == null) {
+				startPoints[i] = startPoint;
+				endPoints[i] = endPoint;
+				break;
+			}
+		}
+		LineSegment lineSegment = new LineSegment(startPoint, endPoint);
 		int segmentsCount = numberOfSegments();
 		segmentsCount++;
 		LineSegment[] newLineSegments = Arrays.copyOf(lineSegments, segmentsCount);

@@ -43,7 +43,30 @@ class FastCollinearPointsTest {
 				new Point(7000, 3000), new Point(20000, 21000), new Point(3000, 4000),
 				new Point(14000, 15000), new Point(6000, 7000)};
 		FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(points);
-		Arrays.stream(fastCollinearPoints.segments()).forEach(ls -> System.out.println(ls.toString()));
 		assertEquals(2, fastCollinearPoints.segments().length);
+		System.out.println(Arrays.toString(fastCollinearPoints.segments()));
+	}
+
+	@Test
+	void testEquidistantFileScenario() {
+		Point[] points = {
+				new Point(10000, 0),
+				new Point(8000, 2000),
+				new Point(2000, 8000),
+				new Point(0, 10000),
+				new Point(20000, 0),
+				new Point(18000, 2000),
+				new Point(2000, 18000),
+				new Point(10000, 20000),
+				new Point(30000, 0),
+				new Point(0, 30000),
+				new Point(20000, 10000),
+				new Point(13000, 0),
+				new Point(11000, 3000),
+				new Point(5000, 12000),
+				new Point(9000, 6000)
+		};
+		FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(points);
+		assertEquals(4, fastCollinearPoints.segments().length);
 	}
 }
