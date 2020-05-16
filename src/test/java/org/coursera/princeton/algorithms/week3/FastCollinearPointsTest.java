@@ -43,8 +43,8 @@ class FastCollinearPointsTest {
 				new Point(7000, 3000), new Point(20000, 21000), new Point(3000, 4000),
 				new Point(14000, 15000), new Point(6000, 7000)};
 		FastCollinearPoints fastCollinearPoints = new FastCollinearPoints(points);
-		assertEquals(2, fastCollinearPoints.segments().length);
 		System.out.println(Arrays.toString(fastCollinearPoints.segments()));
+		assertEquals(2, fastCollinearPoints.segments().length);
 	}
 
 	@Test

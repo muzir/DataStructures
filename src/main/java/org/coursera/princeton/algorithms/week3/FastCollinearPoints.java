@@ -1,5 +1,7 @@
 package org.coursera.princeton.algorithms.week3;
 
+import edu.princeton.cs.algs4.Bag;
+
 import java.util.Arrays;
 
 public class FastCollinearPoints {
@@ -25,28 +27,39 @@ public class FastCollinearPoints {
 			Point p = this.points[i];
 			Point[] copyPoints = Arrays.copyOf(this.points, this.points.length);
 			Arrays.sort(copyPoints, p.slopeOrder());
-			double slope = 0.0;
-			for (int j = 1; j < pointsLength; j++) {
-				Point q = copyPoints[j];
-				double pq = p.slopeTo(q);
-				if (pq == slope) {
-					continue;
-				} else if ((slope == 0) && (pq != slope)) {
-					slope = pq;
+			double[] slopeToArray = new double[copyPoints.length];
+			for (int k = 1; k < copyPoints.length; k++) {
+				slopeToArray[k] = copyPoints[0].slopeTo(copyPoints[k]);
+			}
+			Bag<Integer> bag = new Bag<>();
+			int counter = 0;
+			for (int j = 1; j < slopeToArray.length - 1; j++) {
+				double current = slopeToArray[j];
+				double next = slopeToArray[j + 1];
+				if (current == next) {
+					bag.add(j);
+					counter++;
 				} else {
-					if (j >= 4) {
-						addSegments(copyPoints, j);
-						break;
+					if (counter >= 2) {
+						bag.add(j);
+						addSegments(copyPoints, bag);
 					}
-					slope = 0.0;
+					bag = new Bag<>();
+					counter = 0;
 				}
 			}
 		}
 	}
 
 
-	private void addSegments(Point[] points, int j) {
-		Point[] newArray = Arrays.copyOf(points, j);
+	private void addSegments(Point[] points, Bag<Integer> bag) {
+		Point[] newArray = new Point[bag.size() + 1];
+		newArray[0] = points[0];
+		int counter = 1;
+		for (Integer index : bag) {
+			newArray[counter] = points[index];
+			counter++;
+		}
 		Arrays.sort(newArray);
 		Point startPoint = newArray[0];
 		Point endPoint = newArray[newArray.length - 1];
