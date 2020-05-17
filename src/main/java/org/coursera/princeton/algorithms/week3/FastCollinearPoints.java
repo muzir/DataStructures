@@ -1,7 +1,5 @@
 package org.coursera.princeton.algorithms.week3;
 
-import edu.princeton.cs.algs4.Bag;
-
 import java.util.Arrays;
 
 public class FastCollinearPoints {
@@ -27,24 +25,26 @@ public class FastCollinearPoints {
 			Point p = this.points[i];
 			Point[] copyPoints = Arrays.copyOf(this.points, this.points.length);
 			Arrays.sort(copyPoints, p.slopeOrder());
-			double[] slopeToArray = new double[copyPoints.length];
+			/*double[] slopeToArray = new double[copyPoints.length];
 			for (int k = 1; k < copyPoints.length; k++) {
 				slopeToArray[k] = copyPoints[0].slopeTo(copyPoints[k]);
-			}
-			Bag<Integer> bag = new Bag<>();
+			}*/
 			int counter = 0;
-			for (int j = 1; j < slopeToArray.length - 1; j++) {
-				double current = slopeToArray[j];
-				double next = slopeToArray[j + 1];
-				if (current == next) {
-					bag.add(j);
+			for (int j = i; j < copyPoints.length - 2; j++) {
+				Point current = copyPoints[i];
+				Point next = copyPoints[j + 1];
+				Point nextOne = copyPoints[j + 2];
+				if (current.slopeTo(next) == current.slopeTo(nextOne)) {
 					counter++;
 				} else {
 					if (counter >= 2) {
-						bag.add(j);
-						addSegments(copyPoints, bag);
+						Point[] pointsArray = new Point[counter + 2];
+						pointsArray[0] = copyPoints[0];
+						for (int k = counter; 0 <= counter; counter--, k--) {
+							pointsArray[k + 1] = copyPoints[j - counter];
+						}
+						addSegments(pointsArray);
 					}
-					bag = new Bag<>();
 					counter = 0;
 				}
 			}
@@ -52,17 +52,10 @@ public class FastCollinearPoints {
 	}
 
 
-	private void addSegments(Point[] points, Bag<Integer> bag) {
-		Point[] newArray = new Point[bag.size() + 1];
-		newArray[0] = points[0];
-		int counter = 1;
-		for (Integer index : bag) {
-			newArray[counter] = points[index];
-			counter++;
-		}
-		Arrays.sort(newArray);
-		Point startPoint = newArray[0];
-		Point endPoint = newArray[newArray.length - 1];
+	private void addSegments(Point[] points) {
+		Arrays.sort(points);
+		Point startPoint = points[0];
+		Point endPoint = points[points.length - 1];
 		for (int i = 0; i < startPoints.length; i++) {
 			if (startPoints[i] != null && startPoints[i].compareTo(startPoint) == 0) {
 				if (endPoints[i] != null && endPoints[i].compareTo(endPoint) == 0) {
