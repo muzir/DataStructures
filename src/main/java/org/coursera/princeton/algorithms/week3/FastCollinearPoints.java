@@ -25,10 +25,6 @@ public class FastCollinearPoints {
 			Point p = this.points[i];
 			Point[] copyPoints = Arrays.copyOf(this.points, this.points.length);
 			Arrays.sort(copyPoints, p.slopeOrder());
-			/*double[] slopeToArray = new double[copyPoints.length];
-			for (int k = 1; k < copyPoints.length; k++) {
-				slopeToArray[k] = copyPoints[0].slopeTo(copyPoints[k]);
-			}*/
 			int counter = 0;
 			for (int j = i; j < copyPoints.length - 2; j++) {
 				Point current = copyPoints[i];
