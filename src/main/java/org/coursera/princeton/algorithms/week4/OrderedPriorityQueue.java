@@ -19,12 +19,15 @@ public class OrderedPriorityQueue<Key extends Comparable<Key>> implements Queue<
 	}
 
 	private void swim(int k) {
-		if (k > 1 &&
-				(container[k / 2].compareTo(container[k]) > 0)) {
+		if (k > 1 && less(k / 2, k)) {
 			exch(k, k / 2);
 			k = k / 2;
 			swim(k);
 		}
+	}
+
+	private boolean less(int firstNodeIndex, int secondNodeIndex) {
+		return container[firstNodeIndex].compareTo(container[secondNodeIndex]) < 0;
 	}
 
 	private void exch(int k, int i) {
@@ -35,7 +38,27 @@ public class OrderedPriorityQueue<Key extends Comparable<Key>> implements Queue<
 
 	@Override
 	public Key delMax() {
-		return null;
+		Key maxKey = container[1];
+		exch(1, index);
+		sink(1);
+		container[--index] = null;
+		return maxKey;
+	}
+
+	private void sink(int k) {
+		int maxChildIndex = giveMaxChildIndex(k);
+		if (index > 2 * k && less(k, maxChildIndex)) {
+			exch(k, maxChildIndex);
+			k = maxChildIndex;
+			sink(k);
+		}
+	}
+
+	private int giveMaxChildIndex(int k) {
+		if (less(2 * k, 2 * k + 1)) {
+			return 2 * k + 1;
+		}
+		return 2 * k;
 	}
 
 	@Override
