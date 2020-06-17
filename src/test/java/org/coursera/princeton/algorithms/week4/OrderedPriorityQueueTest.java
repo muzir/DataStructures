@@ -10,7 +10,6 @@ class OrderedPriorityQueueTest {
 		givenCharacterSample();
 		Character maxKey = deleteMax();
 		assertKeyEqualToMaxCharacterSample(maxKey);
-		System.out.println(underTest.toString());
 	}
 
 	private void assertKeyEqualToMaxCharacterSample(Character character) {
