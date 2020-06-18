@@ -14,6 +14,9 @@ public class OrderedPriorityQueue<Key extends Comparable<Key>> implements Queue<
 
 	@Override
 	public void insert(Key key) {
+		if (index == container.length - 1) {
+			throw new QueueFullException();
+		}
 		container[++index] = key;
 		swim(index);
 	}
