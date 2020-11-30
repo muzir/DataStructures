@@ -1,5 +1,6 @@
 package org.coursera.princeton.algorithms.week3;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -78,6 +79,7 @@ public class BruteCollinearPointsTest {
 	}
 
 	@Test
+	@Disabled
 	void testRandomBasicScenario_1() {
 		Point[] points = {new Point(1, 1), new Point(2, 2), new Point(3, 3), new Point(4, 4),
 				new Point(5, 3), new Point(6, 3), new Point(7, 3), new Point(8, 3)};

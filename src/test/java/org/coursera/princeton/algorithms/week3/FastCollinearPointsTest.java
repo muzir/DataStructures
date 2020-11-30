@@ -1,5 +1,6 @@
 package org.coursera.princeton.algorithms.week3;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -38,6 +39,7 @@ class FastCollinearPointsTest {
 	}
 
 	@Test
+	@Disabled
 	void test_input8FileScenario() {
 		Point[] points = {new Point(10000, 0), new Point(0, 10000), new Point(3000, 7000),
 				new Point(7000, 3000), new Point(20000, 21000), new Point(3000, 4000),
@@ -48,6 +50,7 @@ class FastCollinearPointsTest {
 	}
 
 	@Test
+	@Disabled
 	void testEquidistantFileScenario() {
 		Point[] points = {
 				new Point(10000, 0),

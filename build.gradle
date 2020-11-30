@@ -9,13 +9,13 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
-    maven { url "https://repo.spring.io/plugins-release" }
+   maven { url "https://dl.bintray.com/algs4/maven/" }
 }
 
 dependencies {
     testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     // https://mvnrepository.com/artifact/edu.princeton.cs/algs4
-    compile group: 'edu.princeton.cs', name: 'algs4', version: '1.0.2'
+    compile group: 'edu.princeton.cs', name: 'algs4', version: '1.0.4'
 
 }
 

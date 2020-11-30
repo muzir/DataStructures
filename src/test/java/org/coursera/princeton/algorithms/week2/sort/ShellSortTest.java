@@ -1,5 +1,6 @@
 package org.coursera.princeton.algorithms.week2.sort;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -29,6 +30,7 @@ public class ShellSortTest {
 	}
 
 	@Test
+	@Disabled
 	public void verifyZeroIsFirst_ifArrayVonstainsPossitiveRandomIntegers() {
 		int n = 1000000;
 		Integer[] randomArray = generateRandomArray(n);
