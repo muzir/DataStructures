@@ -1,0 +1,4 @@
+a. if(a > b) then c= 0; // there is no then keyword in java so compile time error
+b. if a > b {c=0;} if statements should have paranthesis so compile time error
+c. if( a > b) c=0; // valid statement if a greater than b then c assign to 0
+d. if (a > b) c = 0 else b = 0; // missing ; after c = 0 so compile time error

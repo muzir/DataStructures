@@ -1,0 +1,1 @@
+Solution: It does not allocate memory for a[] with enw. This code results in a variable a might not have been initialized compile time error

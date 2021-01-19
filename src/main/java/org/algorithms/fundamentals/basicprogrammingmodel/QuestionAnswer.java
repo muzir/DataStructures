@@ -1,29 +1,31 @@
 package org.algorithms.fundamentals.basicprogrammingmodel;
 
+import edu.princeton.cs.algs4.StdOut;
+
 import java.util.Arrays;
 
 public class QuestionAnswer {
 	public static void main(String[] args) {
-		System.out.println(Math.abs(-2147483648));
+		StdOut.println(Math.abs(-2147483648));
 		Double infinity = Double.POSITIVE_INFINITY;
 		Double negativeInfinity = Double.NEGATIVE_INFINITY;
-		System.out.println(infinity);
-		System.out.println(negativeInfinity);
+		StdOut.println(infinity);
+		StdOut.println(negativeInfinity);
 
 		int x = 3;
 		if (x < 3.1) {
-			System.out.println("3.1 double literal x converted to double.");
+			StdOut.println("3.1 double literal x converted to double.");
 		}
-//		System.out.println(1 / 0);
-		System.out.println(1.0 / 0.0);
+		//StdOut.println(1 / 0);
+		StdOut.println(1.0 / 0.0);
 		if (false | true) {
-			System.out.println("Single | works");
+			StdOut.println("Single | works");
 		}
 		if (false & true) {
-			System.out.println("Single & works");
+			StdOut.println("Single & works");
 		}
-		int[] a = {1,2,3};
-		System.out.println(a);
-		System.out.println(Arrays.toString(a));
+		int[] a = {1, 2, 3};
+		StdOut.println(a);
+		StdOut.println(Arrays.toString(a));
 	}
 }
