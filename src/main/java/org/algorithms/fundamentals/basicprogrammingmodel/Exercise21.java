@@ -5,7 +5,7 @@ import edu.princeton.cs.algs4.StdOut;
 
 import java.util.Arrays;
 
-public class Exercises21 {
+public class Exercise21 {
 	public static void main(String[] args) {
 		String[] lines = StdIn.readAllLines();
 		StdOut.printf("name first second result \n");
