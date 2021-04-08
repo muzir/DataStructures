@@ -1,6 +1,7 @@
 package org.algorithms.fundamentals.basicprogrammingmodel;
 
 import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdRandom;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -51,15 +52,19 @@ public class Exercise34 {
 		/* Print the numbers in increasing order*/
 		printTheNumbersInIncreasingOrder(sortedNumbers);
 		/* Print the numbers in random order*/
-		//printTheNumbersInRandomOrder(sortedNumbers);
+		printTheNumbersInRandomOrder(sortedNumbers);
 	}
 
-	private static void printTheNumbersInRandomOrder(Double[] sortedNumbers) {
-		for (int i = 0; i < sortedNumbers.length; i++) {
-
+	private static void printTheNumbersInRandomOrder(final Double[] sortedNumbers) {
+		Double[] newSortedArray = Arrays.copyOf(sortedNumbers, sortedNumbers.length);
+		for (int i = 0; i < newSortedArray.length; i++) {
+			int firstIndex = StdRandom.uniform(newSortedArray.length);
+			int secondIndex = StdRandom.uniform(newSortedArray.length);
+			Double temp = newSortedArray[firstIndex];
+			newSortedArray[firstIndex] = newSortedArray[secondIndex];
+			newSortedArray[secondIndex] = temp;
 		}
-		println("The numbers in random order: ");
-		throw new UnsupportedOperationException();
+		println("The numbers in random order: " + Arrays.toString(newSortedArray));
 	}
 
 	private static void printTheNumbersInIncreasingOrder(Double[] sortedNumbers) {
