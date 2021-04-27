@@ -6,7 +6,7 @@ import static org.algorithms.fundamentals.basicprogrammingmodel.Exercise29.count
 import static org.algorithms.fundamentals.basicprogrammingmodel.Exercise29.rank;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class Exercise29Test {
+class Exercise29Test {
 	@Test
 	void simpleDuplicateArrayTest() {
 		int[] arr = {10, 10};
