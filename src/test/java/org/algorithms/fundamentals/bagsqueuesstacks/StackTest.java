@@ -43,4 +43,17 @@ class StackTest {
 		IntStream.range(0, 800).forEach(value -> stack.pop());
 		assertEquals(200, stack.size());
 	}
+
+	@Test
+	void shouldIterateStack_ifCallForEach() {
+		String[] params = {"to", "be", "or", "not"};
+		stack.push(params[0]);
+		stack.push(params[1]);
+		stack.push(params[2]);
+		stack.push(params[3]);
+		int i = params.length - 1;
+		for (String s : stack) {
+			assertEquals(params[i--], s);
+		}
+	}
 }

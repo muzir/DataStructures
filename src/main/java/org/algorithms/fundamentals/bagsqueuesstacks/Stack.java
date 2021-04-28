@@ -2,7 +2,7 @@ package org.algorithms.fundamentals.bagsqueuesstacks;
 
 import java.util.Iterator;
 
-public interface Stack<T> {
+public interface Stack<T> extends Iterable<T>{
 	boolean isEmpty();
 
 	int size();

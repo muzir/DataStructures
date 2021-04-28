@@ -2,7 +2,7 @@ package org.algorithms.fundamentals.bagsqueuesstacks;
 
 import java.util.Iterator;
 
-public class ResizingArrayStack<T> implements Stack<T>, Iterable<T> {
+public class ResizingArrayStack<T> implements Stack<T> {
 
 	private T[] container;
 	private int n;
@@ -41,7 +41,7 @@ public class ResizingArrayStack<T> implements Stack<T>, Iterable<T> {
 
 	@Override
 	public Iterator<T> iterator() {
-		return null;
+		return new ReverseArrayIterator();
 	}
 
 	private void resize(int newCapacity) {
@@ -50,5 +50,19 @@ public class ResizingArrayStack<T> implements Stack<T>, Iterable<T> {
 			temp[i] = container[i];
 		}
 		container = temp;
+	}
+
+	private class ReverseArrayIterator implements Iterator<T> {
+		private int tempN = n;
+
+		@Override
+		public boolean hasNext() {
+			return tempN != 0;
+		}
+
+		@Override
+		public T next() {
+			return container[--tempN];
+		}
 	}
 }
