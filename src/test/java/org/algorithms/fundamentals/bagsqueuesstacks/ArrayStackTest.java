@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class StackTest {
+class ArrayStackTest {
 	private Stack<String> stack;
 
 	@BeforeEach
