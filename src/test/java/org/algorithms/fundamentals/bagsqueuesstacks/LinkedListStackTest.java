@@ -31,13 +31,7 @@ class LinkedListStackTest {
 	}
 
 	@Test
-	void shouldResizeDouble_ifStackReachCapacity() {
-		IntStream.range(0, 1000).forEach(value -> stack.push("to"));
-		assertEquals(1000, stack.size());
-	}
-
-	@Test
-	void shouldHalveDouble_ifStackIsQuarterOfCapacity() {
+	void shouldSupportPushAndPop_ifPushAndPopMultipleTimes() {
 		IntStream.range(0, 1000).forEach(value -> stack.push("to"));
 
 		IntStream.range(0, 800).forEach(value -> stack.pop());
