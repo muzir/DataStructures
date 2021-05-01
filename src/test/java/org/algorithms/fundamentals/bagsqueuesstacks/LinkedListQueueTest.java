@@ -45,9 +45,10 @@ class LinkedListQueueTest {
 		queue.enqueue(params[1]);
 		queue.enqueue(params[2]);
 		queue.enqueue(params[3]);
-		int i = params.length - 1;
+		System.out.println(queue);
+		int i = 0;
 		for (String s : queue) {
-			assertEquals(params[i--], s);
+			assertEquals(params[i++], s);
 		}
 	}
 }
