@@ -23,7 +23,7 @@ class Exercise2Test {
 		return Stream.of(arguments(List.of(new Interval1D(0, 1), new Interval1D(2, 3), new Interval1D(4, 5)),
 				emptyMap()),
 				arguments(List.of(new Interval1D(0, 2), new Interval1D(1, 2)),
-						Map.of(new Interval1D(0, 2), Set.of(new Interval1D(1, 2))), new Interval1D(1, 2), Set.of(new Interval1D(0, 2)))
+						Map.of(new Interval1D(0, 2), Set.of(new Interval1D(1, 2)), new Interval1D(1, 2), Set.of(new Interval1D(0, 2))))
 		);
 	}
 
