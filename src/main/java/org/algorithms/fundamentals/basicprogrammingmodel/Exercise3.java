@@ -2,7 +2,7 @@ package org.algorithms.fundamentals.basicprogrammingmodel;
 
 import edu.princeton.cs.algs4.StdOut;
 
-public class Exercise3 {
+class Exercise3 {
 	public static void main(String[] args) {
 		int a = Integer.parseInt(args[0]);
 		int b = Integer.parseInt(args[1]);
@@ -12,9 +12,5 @@ public class Exercise3 {
 		} else {
 			StdOut.println("not equal");
 		}
-	}
-
-	public double[] findUniformDistributedValues() {
-		return new double[0];
 	}
 }
