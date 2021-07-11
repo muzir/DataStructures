@@ -9,14 +9,14 @@ sourceCompatibility = 13
 
 repositories {
     mavenCentral()
-   maven { url "https://dl.bintray.com/algs4/maven/" }
+    maven { url 'https://raw.github.com/slok/algs4-mvn-repo/master' }
 }
 
 dependencies {
-    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
     // https://mvnrepository.com/artifact/edu.princeton.cs/algs4
-    compile group: 'edu.princeton.cs', name: 'algs4', version: '1.0.4'
-
+    implementation('edu.princeton.cs.algs4:algs4:1.0')
+    testImplementation('org.junit.jupiter:junit-jupiter:5.5.2')
+    testImplementation ('edu.princeton.cs.algs4:algs4:1.0')
 }
 
 test {

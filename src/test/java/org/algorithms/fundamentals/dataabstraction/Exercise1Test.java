@@ -17,14 +17,23 @@ public class Exercise1Test {
 	Exercise1 underTest;
 
 	static Stream<Arguments> minPointsDistance() {
-		return Stream.of(arguments(List.of(
-				new Point2D(0, 1),
-				new Point2D(0, 7),
-				new Point2D(0, 20)), 6),
+		return Stream.of(
+				arguments(List.of(
+						new Point2D(0, 1),
+						new Point2D(0, 7),
+						new Point2D(0, 20)), 6),
 				arguments(List.of(
 						new Point2D(0, 0),
 						new Point2D(0, 50),
-						new Point2D(0, 70)), 20));
+						new Point2D(0, 70)), 20),
+				arguments(List.of(
+						new Point2D(10, 0),
+						new Point2D(50, 0),
+						new Point2D(70, 0)), 20),
+				arguments(List.of(
+						new Point2D(1, 2),
+						new Point2D(2, 2),
+						new Point2D(4, 2)), 1));
 	}
 
 	@BeforeEach

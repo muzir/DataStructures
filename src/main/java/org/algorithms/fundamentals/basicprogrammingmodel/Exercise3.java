@@ -13,4 +13,8 @@ public class Exercise3 {
 			StdOut.println("not equal");
 		}
 	}
+
+	public double[] findUniformDistributedValues() {
+		return new double[0];
+	}
 }
