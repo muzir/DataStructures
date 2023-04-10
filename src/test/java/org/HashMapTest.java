@@ -1,4 +1,4 @@
-package com.transferwise.moneytracker;
+package org;
 
 import org.junit.jupiter.api.Test;
 
